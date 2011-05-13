@@ -114,6 +114,7 @@ class WordPressPost:
 		self.allowPings	= False
 		self.allowComments = False
 		self.tags = []
+		self.slug = ''
 
 		
 class WordPressClient:
@@ -145,6 +146,7 @@ class WordPressClient:
 		postObj.categories 		= post['categories']
 		postObj.allowPings 		= post['mt_allow_pings'] == 1
 		postObj.tags			= post['mt_keywords']
+		postObj.slug			= post['wp_slug']
 		return postObj
 		
 	def _filterCategory(self, cat):
@@ -225,7 +227,8 @@ class WordPressClient:
 		blogContent = {
 			'title' : post.title,
 			'description' : post.description,
-			'mt_keywords': post.tags	
+			'mt_keywords': post.tags,
+            'wp_slug' : post.slug
 		}
 		
 		# add categories
@@ -275,7 +278,8 @@ class WordPressClient:
 			'permaLink' : post.permaLink,
 			'mt_allow_pings' : post.allowPings,
 			'mt_text_more' : post.textMore,
-			'mt_excerpt' : post.excerpt
+			'mt_excerpt' : post.excerpt,
+            'wp_slug' : post.slug
 		}
 		
 		if post.date:
